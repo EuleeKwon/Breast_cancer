@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538379513309.000,
+    "dirty" : false,
+    "encoding" : "CP949",
+    "folds" : "",
+    "hash" : "78276577",
+    "id" : "7EFF5346",
+    "lastKnownWriteTime" : 1538389221,
+    "last_content_update" : 1538389221642,
+    "path" : "~/RStudio/BCSC_cancer/BCSC_DATA.R",
+    "project_path" : "BCSC_DATA.R",
+    "properties" : {
+        "cursorPosition" : "9,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

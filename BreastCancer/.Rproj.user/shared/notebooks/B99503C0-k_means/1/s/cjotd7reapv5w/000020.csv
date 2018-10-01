@@ -1,0 +1,14 @@
+"0","visual <- NULL"
+"2","Warning message:
+"
+"2","In strsplit(code, ""\n"", fixed = TRUE) :"
+"2","
+ "
+"2"," input string 1 is invalid in this locale
+"
+"0","for(i in 2:6) {"
+"0","  set.seed(0723) "
+"0","  eval(parse(text=paste(""result"",i,""<- kmeans(bc_train[,-5],"",i,"");"",sep=""""))) "
+"0","  eval(parse(text=paste(""visual["",i,""] <- result"",i,""$tot.withinss"",sep=""""))) "
+"0","}"
+"0","plot(visual[-1], type=""l"", ylab="""", xlab="""", main=""cluster의 개수에 따른 내부분산"") "

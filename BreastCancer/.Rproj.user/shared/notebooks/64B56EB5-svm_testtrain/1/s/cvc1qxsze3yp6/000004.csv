@@ -1,0 +1,33 @@
+"0","Class_classifier <-ksvm(Class~.,data=bc_train,kernel=""vanilladot"")"
+"1"," Setting default kernel parameters "
+"1"," "
+"1","
+"
+"0","Class_classifier"
+"1","Support Vector Machine object of class ""ksvm"""
+"1"," "
+"1","
+"
+"1","
+"
+"1","SV type: C-svc"
+"1","  (classification) 
+"
+"1"," parameter : cost C = 1 
+"
+"1","
+"
+"1","Linear (vanilla) kernel function. 
+"
+"1","
+Number of Support Vectors : 151 
+"
+"1","
+Objective Function Value :"
+"1"," "
+"1","-132.8858"
+"1"," "
+"1","
+"
+"1","Training error : 0.261044 
+"

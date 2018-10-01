@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538407816545.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "B77D4853",
+    "lastKnownWriteTime" : 3419473789575321445,
+    "last_content_update" : 1538407816545,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "4396D5DD",
+        "caption" : "WDBC",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=WDBC&cache_key=4396D5DD",
+        "displayedObservations" : "569",
+        "environment" : "",
+        "object" : "WDBC",
+        "preview" : "0",
+        "totalObservations" : "569",
+        "variables" : "32"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

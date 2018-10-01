@@ -1,0 +1,19 @@
+"0","library(xlsx)"
+"0","library(dplyr)"
+"0","library(ggplot2)"
+"0","library(caret)"
+"0","library(e1071)"
+"2","package ¡®e1071¡¯ was built under R version 3.4.4"
+"0","library(class)"
+"0","library(gmodels)"
+"0","library(kernlab)"
+"2","package ¡®kernlab¡¯ was built under R version 3.4.4"
+"2","
+Attaching package: ¡®kernlab¡¯
+
+"
+"2","The following object is masked from ¡®package:ggplot2¡¯:
+
+    alpha
+
+"

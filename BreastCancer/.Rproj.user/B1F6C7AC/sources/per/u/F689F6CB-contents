@@ -1,0 +1,28 @@
+#애니메이션화 시켜서 k-means 확인
+install.packages("animation")
+
+
+library(xlsx)
+library(dplyr)
+library(lattice)
+library(ggplot2)
+library(caret)
+library(e1071)
+library(class)
+library(gmodels)
+library(kknn)
+library(Epi)
+
+
+bc <- read.xlsx("BCSC_2009_NA.xlsx",1)
+
+bc <- bc %>% 
+  mutate("Non-Hispanic white" = ifelse(race_eth == 1,1,0)) %>% 
+  mutate("Non-Hispanic black" = ifelse(race_eth == 2,1,0)) %>% 
+  mutate("Asian/Pacific Islander" = ifelse(race_eth == 3,1,0)) %>% 
+  mutate("Native American"= ifelse(race_eth == 4,1,0)) %>% 
+  mutate("Hispanic" = ifelse(race_eth == 5,1,0)) %>%
+  mutate("Other/mixed" = ifelse(race_eth == 6,1,0)) 
+  
+
+bc <- bc[, ! names(bc) %in% c("race_eth"), drop = F]

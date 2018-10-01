@@ -1,0 +1,29 @@
+"0","library(xlsx)"
+"2","package ¡®xlsx¡¯ was built under R version 3.4.4"
+"0","library(dplyr)"
+"2","package ¡®dplyr¡¯ was built under R version 3.4.4"
+"2","
+Attaching package: ¡®dplyr¡¯
+
+"
+"2","The following objects are masked from ¡®package:stats¡¯:
+
+    filter, lag
+
+"
+"2","The following objects are masked from ¡®package:base¡¯:
+
+    intersect, setdiff, setequal, union
+
+"
+"0","library(ggplot2)"
+"2","package ¡®ggplot2¡¯ was built under R version 3.4.4"
+"0","library(caret)"
+"2","package ¡®caret¡¯ was built under R version 3.4.4"
+"2","Loading required package: lattice
+"
+"0","library(e1071)"
+"2","package ¡®e1071¡¯ was built under R version 3.4.4"
+"0","library(class)"
+"0","library(gmodels)"
+"2","package ¡®gmodels¡¯ was built under R version 3.4.4"

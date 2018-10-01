@@ -1,0 +1,95 @@
+---
+title: "LR_ANN_NOR"
+author: "KWONHYUNJIN"
+date: "2018년 10월 1일"
+output: html_document
+---
+
+#nnet: ANN 패키지
+```{r setup, include=FALSE}
+library(xlsx)
+library(dplyr)
+library(ggplot2)
+library(caret)
+library(class)
+library(gmodels)
+library(nnet)
+```
+
+
+```{r}
+bc <- read.xlsx("New_version_breast_cancer_v2.xlsx",1)
+head(bc)
+```
+
+
+#set.seed란 랜덤한 값을 시작하기 전에 사용하면 이후에도 같은 값으로 랜덤값을 갖는다.
+#동일한 랜덤값을 계속해서 받기위해
+```{r}
+set.seed(123)
+bc_shuffle <- bc[sample(nrow(bc)), ]
+head(bc_shuffle)
+```
+
+
+#현재 bc 데이터 프레임에 id라는 컬럼이 필요없다.
+#bc_shuffle에서 1번컬럼은 제외하고 나머지 컬럼을 bc2에 할당한다.
+```{r}
+bc2 <-bc_shuffle[-1]
+head(bc2)
+```
+
+#normalize라는 정규화함수를 사용자 정의 함수로 생성한다.
+#class(label)에 해당하는 행 을 찾음 -> 정규화 시킬때 범주형 데이터를 제외하기 위해서 
+```{r}
+normalize <- function(x) {
+  return ( (x-min(x)) / (max(x) - min(x))  )
+}
+
+ncol <- which(colnames(bc2) == "Class")
+ncol
+```
+
+```{r}
+head(bc2[-ncol])
+```
+
+
+#lapply(list or vector,function): 함수를 하나하나에 사용하려 할때
+#(굉장히 자주 쓰이는 함수)
+#as.data.frame: dataframe으로 변환하는 함수
+#factor인 label을 제외하고 normalize한다.
+```{r}
+bc_n <- as.data.frame(lapply(bc2[-ncol],normalize))
+head(bc_n)
+```
+#Train 과 Test 를 9:1로 나눈다
+```{r}
+train_num<-round(0.9*nrow(bc2),0)
+bc_train<-bc2[1:train_num,]
+bc_test<-bc2[(train_num+1):nrow(bc2),]
+```
+
+#size = 2는 hidden layer가 2층 이라는 뜻
+#decay = 5e-04는 overfitting을 피하기 위해 사용하는 weight decay parametem, default 값은 0
+#maxit = 200은 200번 반복
+```{r}
+set.seed(123)
+model <- nnet(Class ~ ., data = bc_train, size = 2, decay = 5e-04, maxit = 200)
+```
+
+```{r}
+summary(model)
+```
+
+
+#분류를 얻을때는 type=“class"를 지정해야하지만, 기본 값이 class이므로 생략 가능 
+```{r}
+pred <- predict(model,bc_test,type="class")
+table(pred,bc_test$Class)
+```
+
+
+```{r}
+confusionMatrix(table(pred, bc_test$Class))
+```

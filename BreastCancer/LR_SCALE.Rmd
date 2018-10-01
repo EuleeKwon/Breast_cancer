@@ -1,0 +1,70 @@
+---
+title: "LR_SCALE"
+author: "KWONHYUNJIN"
+date: "2018년 10월 1일"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(xlsx)
+library(dplyr)
+library(ggplot2)
+library(caret)
+library(class)
+library(gmodels)
+library(nnet)
+```
+
+```{r}
+New_version_breast_cancer <- read.xlsx("New_version_breast_cancer.xlsx",1)
+bc <- New_version_breast_cancer
+head(bc)
+```
+
+
+#set.seed란 랜덤한 값을 시작하기 전에 사용하면 이후에도 같은 값으로 랜덤값을 갖는다.
+#동일한 랜덤값을 계속해서 받기위해
+```{r}
+set.seed(123)
+bc_shuffle <- bc[sample(nrow(bc)), ]
+head(bc_shuffle)
+```
+
+```{r}
+bc2 <-bc_shuffle[-1]
+str(bc2)
+```
+
+
+#lapply(list or vector,function): 함수를 하나하나에 사용하려 할때
+#(굉장히 자주 쓰이는 함수)
+#as.data.frame: dataframe으로 변환하는 함수
+#factor인 label을 제외하고 normalize한다.
+```{r}
+bc_n <- bc2[-6]
+bc_n <- scale(bc_n)
+head(bc_n)
+```
+
+
+```{r}
+train_num<-round(0.9*nrow(bc2),0)
+bc_train<-bc2[1:train_num,]
+bc_test<-bc2[(train_num+1):nrow(bc2),]
+```
+
+
+```{r}
+set.seed(2345)
+res <- kmeans(bc_train[-6],center=2)
+res$centers
+```
+
+#클러스팅한 사이즈
+```{r}
+res$size
+```
+
+```{r}
+res$betweenss/res$totss*100
+```

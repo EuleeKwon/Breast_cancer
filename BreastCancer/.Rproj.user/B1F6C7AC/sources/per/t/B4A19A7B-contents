@@ -1,0 +1,62 @@
+---
+title: "ksvm"
+author: "KWONHYUNJIN"
+date: "2018년 9월 21일"
+output: html_document
+---
+#e1071: svm 을 위한 패키지
+```{r setup, include=FALSE}
+library(xlsx)
+library(dplyr)
+library(ggplot2)
+library(caret)
+library(e1071)
+library(class)
+library(gmodels)
+library(kernlab)
+```
+
+```{r}
+bc <- read.xlsx("New_version_breast_cancer.xlsx",1)
+head(bc)
+```
+
+#set.seed란 랜덤한 값을 시작하기 전에 사용하면 이후에도 같은 값으로 랜덤값을 갖는다.
+#동일한 랜덤값을 계속해서 받기위해
+#과연 필요할지에 대해 고찰 
+```{r}
+set.seed(123)
+bc_shuffle <- bc[sample(nrow(bc)), ]
+head(bc_shuffle)
+```
+
+#현재 bc 데이터 프레임에 id라는 컬럼이 필요없다.
+#bc_shuffle에서 1번컬럼은 제외하고 나머지 컬럼을 bc2에 할당한다.
+```{r}
+bc2 <- bc_shuffle[-1]
+head(bc2)
+```
+
+
+#Train 과 Test 를 9:1로 나눈다.
+#bc_n은 shuffle 을 한 bc2 값에서 label 값을 빼고 정규화 시킨값 
+```{r}
+train_num<-round(0.9*nrow(bc2),0)
+bc_train<-bc2[1:train_num,]
+bc_test<-bc2[(train_num+1):nrow(bc2),]
+```
+
+#ksvm()함수는 가우시안 커널을 기본으로 하며 vanilladot 은 특별한 변환이 내적 계산 
+```{r}
+Class_classifier <-ksvm(Class~.,data=bc_train,kernel="vanilladot")
+Class_classifier
+```
+
+```{r}
+Class_predictions <- predict(Class_classifier,bc_test)
+```
+
+
+```{r}
+confusionMatrix(table(Class_predictions, bc_test$Class))
+```

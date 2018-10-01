@@ -1,0 +1,155 @@
+---
+title: "unsupervised_learning"
+author: "KWONHYUNJIN"
+date: "2018년 9월 30일"
+output: html_document
+---
+```{r}
+options(java.parameters = "-Xmx8000m")
+```
+#e1071: svm 을 위한 패키지
+```{r setup, include=FALSE}
+library(xlsx)
+library(dplyr)
+library(ggplot2)
+library(caret)
+library(e1071)
+library(class)
+library(gmodels)
+library(kernlab)
+library(ggplot2)
+library(stats)
+library(animation)
+```
+
+```{r}
+bc <- read.xlsx("BCSC_2009_NA.xlsx",1)
+head(bc)
+bc2 <- bc
+```
+
+#범주형 데이터 더미코딩 
+```{r}
+bc2 <- bc2 %>% 
+  mutate("Non-Hispanic white" = ifelse(race_eth == 1,1,0)) %>% 
+  mutate("Non-Hispanic black" = ifelse(race_eth == 2,1,0)) %>% 
+  mutate("Asian/Pacific Islander" = ifelse(race_eth == 3,1,0)) %>% 
+  mutate("Native American"= ifelse(race_eth == 4,1,0)) %>% 
+  mutate("Hispanic" = ifelse(race_eth == 5,1,0)) %>%
+  mutate("Other/mixed" = ifelse(race_eth == 6,1,0)) 
+
+bc2 <- bc2[, ! names(bc) %in% c("race_eth"), drop = F]
+```
+
+
+```{r}
+bc_na <- na.omit(bc2)
+table(is.na(bc_na))
+```
+
+
+
+#set.seed란 랜덤한 값을 시작하기 전에 사용하면 이후에도 같은 값으로 랜덤값을 갖는다.
+#동일한 랜덤값을 계속해서 받기위해
+```{r}
+set.seed(123)
+bc_shuffle <- bc_na[sample(nrow(bc_na)), ]
+head(bc_shuffle)
+```
+
+#현재 bc 데이터 프레임에 년도는 필요없다.
+#bc_shuffle에서 1번컬럼은 제외하고 나머지 컬럼을 bc2에 할당한다.
+```{r}
+bc2 <- bc_shuffle[-1]
+bc2 <- bc2[-11]
+head(bc2)
+```
+
+
+#Train 과 Test 를 9:1로 나눈다.
+```{r eval=FALSE, include=FALSE}
+train_num<-round(0.9*nrow(bc2),0)
+bc_train<-bc2[1:train_num,]
+bc_test<-bc2[(train_num+1):nrow(bc2),]
+```
+
+#train에다가 모든 데이터를 일단 넣고 사용
+#scale 함수를 이용하여 표준화
+#값 = 원래데이터값 - 평균데이터값 / 표준편차
+```{r}
+bc_train <-bc2
+bc_train <- scale(bc_train)
+head(bc_train)
+```
+
+#고정적인 값을 받기 위해 
+#2개의 클러스터로 분류
+```{r}
+set.seed(2345)
+res <- kmeans(bc_train,center=2)
+res$centers
+```
+
+#클러스팅한 사이즈
+```{r}
+res$size
+```
+
+#https://www.guru99.com/r-k-means-clustering.html
+#결과값을 애니메이션화 시켜서 보여주는 코드
+```{r eval=FALSE, include=FALSE}
+kmeans.ani(res[2:3], 3,replace)
+```
+
+
+
+```{r}
+res$betweenss/res$totss*100
+```
+
+
+#cluster이 4일때 가장 적합
+#https://m.blog.naver.com/PostView.nhn?blogId=leedk1110&logNo=220792605053&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F
+```{r}
+visual <- NULL
+for(i in 2:6) {
+  set.seed(0723) 
+  eval(parse(text=paste("result",i,"<- kmeans(bc_train[,-5],",i,");",sep=""))) 
+  eval(parse(text=paste("visual[",i,"] <- result",i,"$tot.withinss",sep=""))) 
+}
+plot(visual[-1], type="l", ylab="", xlab="", main="cluster의 개수에 따른 내부분산") 
+```
+
+#4에 가장 적합하다는 결과를 반영하여 4개로 분류 
+```{r}
+set.seed(2345)
+res <- kmeans(bc_train,center=4)
+res$centers
+```
+
+#주성분분석에서 구한 2개의 주성분 점수를 군집분석으로 부터 구한 군집별로 산포도
+#http://statdb1.uos.ac.kr/teaching/multi-under/cluster2.html
+```{r}
+bc_pca <- prcomp(bc_train)
+bc_pca
+```
+
+```{r}
+plot(bc_pca$x[, 1:2],  pch = kmeans(bc_train, centers = 2)$cluster)
+```
+
+
+
+
+```{r}
+set.seed(786)
+bc_H <-bc2
+str(bc_H)
+```
+
+```{r}
+summary(bc_H)
+bc_H <- na.omit(bc_H)
+bc_H_clust <- hclust(bc_H)
+```
+

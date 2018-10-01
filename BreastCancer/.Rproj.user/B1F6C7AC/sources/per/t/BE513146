@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1537194105917.000,
+    "dirty" : false,
+    "encoding" : "CP949",
+    "folds" : "",
+    "hash" : "2109196252",
+    "id" : "BE513146",
+    "lastKnownWriteTime" : 1538391177,
+    "last_content_update" : 1538391177389,
+    "path" : "~/RStudio/BreastCancer/knnrunning1.r",
+    "project_path" : "knnrunning1.r",
+    "properties" : {
+        "cursorPosition" : "75,41",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

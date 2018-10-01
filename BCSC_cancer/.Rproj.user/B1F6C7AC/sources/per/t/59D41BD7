@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538386649176.000,
+    "dirty" : false,
+    "encoding" : "CP949",
+    "folds" : "",
+    "hash" : "1100884755",
+    "id" : "59D41BD7",
+    "lastKnownWriteTime" : 1538387614,
+    "last_content_update" : 1538387614303,
+    "path" : "~/RStudio/BCSC_cancer/SVM.Rmd",
+    "project_path" : "SVM.Rmd",
+    "properties" : {
+        "cursorPosition" : "112,0",
+        "last_setup_crc32" : "399D335Bed96b3ac",
+        "scrollLine" : "96",
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

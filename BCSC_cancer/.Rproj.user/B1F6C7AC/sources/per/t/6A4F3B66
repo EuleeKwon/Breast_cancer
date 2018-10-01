@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538379519979.000,
+    "dirty" : false,
+    "encoding" : "CP949",
+    "folds" : "",
+    "hash" : "2702509374",
+    "id" : "6A4F3B66",
+    "lastKnownWriteTime" : 1538386602,
+    "last_content_update" : 1538386602679,
+    "path" : "~/RStudio/BCSC_cancer/kNN.Rmd",
+    "project_path" : "kNN.Rmd",
+    "properties" : {
+        "cursorPosition" : "115,3",
+        "last_setup_crc32" : "399D335Bb5d4dc19",
+        "scrollLine" : "111",
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

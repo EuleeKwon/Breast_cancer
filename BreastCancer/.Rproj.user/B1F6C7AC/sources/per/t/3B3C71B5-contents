@@ -1,0 +1,111 @@
+---
+title: "kNN"
+author: "KWONHYUNJIN"
+date: "2018년 9월 18일"
+output: html_document
+---
+
+#caret 데이터 학습 라이브러리
+#class라이브러리 : train 데이터의 각 행에 대한 범주인 팩터 벡터
+#gmodel 패키지: CrossTable(교차표)를 그려주는 패키지
+#kknn: knn패키지 
+```{r setup, include=FALSE}
+library(xlsx)
+library(dplyr)
+library(ggplot2)
+library(caret)
+library(class)
+library(gmodels)
+library(kknn)
+```
+
+#데이터 불러오기
+```{r}
+bc <- read.xlsx("New_version_breast_cancer.xlsx",1)
+str(bc)
+```
+
+#set.seed란 랜덤한 값을 시작하기 전에 사용하면 이후에도 같은 값으로 랜덤값을 갖는다.
+#seed(123)은 동일한 랜덤값을 계속해서 받기위해
+#nrow 주어진 데이터 프레임 또는 벡터의 행의 수 또는 길이를 반환하는 함수
+#편향방지
+#sample 함수는 데이터에서 무작위로 샘플을 추출해주는 함수
+```{r}
+set.seed(123)
+bc_shuffle <- bc[sample(nrow(bc)), ]
+head(bc_shuffle)
+```
+
+#현재 bc 데이터 프레임에 id라는 컬럼이 필요없다.(그냥 shuffle된거 확인용) 
+#bc_shuffle에서 1번컬럼은 제외하고 나머지 컬럼을 bc2에 할당한다.
+```{r}
+bc2 <- bc_shuffle[-1]
+head(bc2)
+```
+
+
+#normalize라는 정규화함수를 사용자 정의 함수로 생성한다.
+#class(label)에 해당하는 행 을 찾음 -> 정규화 시킬때 범주형 데이터를 제외하기 위해서 
+```{r}
+normalize <- function(x) {
+  return ( (x-min(x)) / (max(x) - min(x))  )
+}
+
+ncol <- which(colnames(bc2) == "Class")
+ncol
+```
+
+```{r}
+head(bc2[-ncol])
+```
+
+
+#lapply(list or vector,function): 함수를 하나하나에 사용하려 할때
+#(굉장히 자주 쓰이는 함수)
+#as.data.frame: dataframe으로 변환하는 함수
+#factor인 label을 제외하고 normalize한다.
+```{r}
+bc_n <- as.data.frame(lapply(bc2[-ncol],normalize))
+head(bc_n)
+```
+
+#Train 과 Test 를 9:1로 나눈다.
+#bc_n은 shuffle 을 한 bc2 값에서 label 값을 빼고 정규화 시킨값 
+```{r}
+train_num<-round(0.9*nrow(bc_n),0)
+bc_train<-bc_n[1:train_num,]
+bc_test<-bc_n[(train_num+1):nrow(bc_n),]
+```
+
+
+#bc2는 bc를 shuffle 한 값
+#bc2에서 train 과 test 갯수에 맞게 label 값을 가져와서 bc_oo_label 이라는 변수에 담는다.
+#결국 bc_train 은 factor bc_train_label 은 해당 factor의 label 을 가지고 있다. 
+```{r}
+bc_train_label <- bc2[1:train_num,ncol]
+bc_test_label <- bc2[(train_num+1):nrow(bc_n),ncol]
+```
+
+
+## 데이터 훈련 
+#k_n값은 주로 훈련데이터의 제곱근/홀수
+#class : train 데이터의 각 행에 대한 범주인 팩터 벡터
+#근처에 k갯수의 값을 고르고 다수결에 따라 해당 label 결정 
+#bc_train 과 bc_test 는 둘다 Label 이 없는 값
+#bc_test_pred 은 bc_test 한거에 대한 Label 을 예측한 값을 가지고 있음
+```{r}
+bc_test_pred <- knn(train=bc_train, test=bc_test, cl= bc_train_label, k = 15 )
+bc_test_pred
+```
+
+
+#예측값(result1)과 실제값(bc_test_label : 정답)의 교차표 생성
+```{r}
+CrossTable(x=bc_test_label,y=bc_test_pred)
+```
+
+#confusionMatrix(예측값, 결과값) 함수를 이용하면 정확도 확인
+```{r}
+confusionMatrix(table(bc_test_label, bc_test_pred))
+```
+

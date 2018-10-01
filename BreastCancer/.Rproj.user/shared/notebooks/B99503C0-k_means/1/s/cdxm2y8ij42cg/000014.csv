@@ -1,0 +1,5 @@
+"0","kmeans.ani(res[2:3], 3,replace=FALSE)
+"
+"2","Error in kmeans.ani(res[2:3], 3, replace = FALSE) : 
+  unused argument (replace = FALSE)
+"

@@ -1,0 +1,2 @@
+"0","bc_train_label <- bc2[1:train_num,ncol]"
+"0","bc_test_label <- bc2[(train_num+1):nrow(bc_n),ncol]"

@@ -1,0 +1,27 @@
+"0","set.seed(123)"
+"0","model <- nnet(Class ~ ., data = bc_train, size = 2, decay = 5e-04, maxit = 200)"
+"1","# weights: "
+"1"," "
+"1","13"
+"1","
+"
+"1","initial  value 229.459827 
+"
+"1","iter  10 value 130.621051
+"
+"1","iter  20 value 129.559481
+"
+"1","iter  30 value 129.462966
+"
+"1","iter  40 value 129.174358
+"
+"1","iter  50 value 128.643959
+"
+"1","iter  60 value 128.639698
+"
+"1","iter  70 value 128.623879
+"
+"1","final  value 128.620332 
+"
+"1","converged
+"

@@ -1,0 +1,3 @@
+"0","set.seed(123)"
+"0","bc_shuffle <- bc[sample(nrow(bc)), ]"
+"0","head(bc_shuffle)"

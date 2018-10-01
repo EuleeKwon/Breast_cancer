@@ -1,0 +1,2 @@
+"0","bc_n <- as.data.frame(lapply(bc_s[-ncol],normalize))"
+"0","head(bc_n)"

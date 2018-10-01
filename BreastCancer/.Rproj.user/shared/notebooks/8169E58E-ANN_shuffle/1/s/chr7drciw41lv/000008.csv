@@ -1,0 +1,44 @@
+"0","model <- nnet(Class ~ ., data = bc_train, size = 2, decay = 5e-04, maxit = 200)"
+"1","# weights: "
+"1"," "
+"1","39"
+"1","
+"
+"1","initial  value 157.490006 
+"
+"1","iter  10 value 133.289573
+"
+"1","iter  20 value 126.193855
+"
+"1","iter  30 value 122.276419
+"
+"1","iter  40 value 121.593436
+"
+"1","iter  50 value 121.248434
+"
+"1","iter  60 value 120.622451
+"
+"1","iter  70 value 120.480613
+"
+"1","iter  80 value 120.412198
+"
+"1","iter  90 value 120.358022
+"
+"1","iter 100 value 120.355621
+"
+"1","iter 110 value 120.326474
+"
+"1","iter 120 value 119.871678
+"
+"1","iter 130 value 119.735313
+"
+"1","iter 140 value 119.734936
+"
+"1","iter 150 value 119.734663
+"
+"1","iter 160 value 119.734548
+"
+"1","final  value 119.734492 
+"
+"1","converged
+"

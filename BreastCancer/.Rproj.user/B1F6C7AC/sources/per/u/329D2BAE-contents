@@ -1,0 +1,24 @@
+#knn패키지 
+install.packages("kknn")
+
+#svm 을 위한 패키지
+install.packages("e1071")
+install.packages("kernlab")
+
+#tree패키지
+install.packages("tree")
+install.packages("nnet")
+
+#ROC 커브 그리기
+install.packages("Epi")
+
+library(xlsx)
+library(dplyr)
+library(lattice)
+library(ggplot2)
+library(caret)
+library(e1071)
+library(class)
+library(gmodels)
+library(kknn)
+library(Epi)

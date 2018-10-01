@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1537373783202.000,
+    "dirty" : false,
+    "encoding" : "CP949",
+    "folds" : "",
+    "hash" : "3421947766",
+    "id" : "46E53E5F",
+    "lastKnownWriteTime" : 1538320343,
+    "last_content_update" : 1538320343809,
+    "path" : "~/RStudio/BreastCancer/ANN_shuffle.Rmd",
+    "project_path" : "ANN_shuffle.Rmd",
+    "properties" : {
+        "cursorPosition" : "61,3",
+        "last_setup_crc32" : "",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

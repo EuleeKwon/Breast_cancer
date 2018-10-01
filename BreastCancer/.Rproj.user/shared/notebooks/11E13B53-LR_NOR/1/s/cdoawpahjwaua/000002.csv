@@ -1,0 +1,3 @@
+"0","train_num<-round(0.9*nrow(bc2),0)"
+"0","bc_train<-bc2[1:train_num,]"
+"0","bc_test<-bc2[(train_num+1):nrow(bc2),]"

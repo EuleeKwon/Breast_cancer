@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1537229194385.000,
+    "dirty" : false,
+    "encoding" : "CP949",
+    "folds" : "",
+    "hash" : "1427427913",
+    "id" : "3B3C71B5",
+    "lastKnownWriteTime" : 1537538167,
+    "last_content_update" : 1537538169017,
+    "path" : "~/RStudio/BreastCancer/knnrunning_shuffle.Rmd",
+    "project_path" : "knnrunning_shuffle.Rmd",
+    "properties" : {
+        "cursorPosition" : "108,0",
+        "last_setup_crc32" : "",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

@@ -1,0 +1,4 @@
+"0","bc_pca <- prcomp(bc_test)
+"
+"2","Error in prcomp(bc_test) : object 'bc_test' not found
+"

@@ -1,0 +1,82 @@
+---
+title: "LR"
+author: "KWONHYUNJIN"
+date: "2018년 9월 20일"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(xlsx)
+library(dplyr)
+library(ggplot2)
+library(caret)
+library(class)
+library(gmodels)
+library(nnet)
+```
+
+```{r}
+bc <- read.xlsx("New_version_breast_cancer.xlsx",1)
+head(bc)
+```
+
+#set.seed란 랜덤한 값을 시작하기 전에 사용하면 이후에도 같은 값으로 랜덤값을 갖는다.
+#동일한 랜덤값을 계속해서 받기위해
+```{r}
+set.seed(123)
+bc_shuffle <- bc[sample(nrow(bc)), ]
+head(bc_shuffle)
+```
+
+```{r}
+bc2 <-bc_shuffle[-1]
+str(bc2)
+```
+
+
+```{r}
+train_num<-round(0.9*nrow(bc2),0)
+bc_train<-bc2[1:train_num,]
+bc_test<-bc2[(train_num+1):nrow(bc2),]
+```
+
+
+
+#일반화 선형 모형은 종속변수가 정규분포하지 않는 경우를 포함하는 선형모형의 확장이며 glm()함수를 사용
+#family는 종속변수의 분포에 따라 사용
+#종속변수의 분포가 정규분포인 경우 gaussian, 이항분포인 경우 binomial, 포아송분포인 경우 poisson, 역정규분포인 경우 inverse.gaussian, 감마분포인 경우 gamma, 응답분포가 확실하지 않은 때를 위한 유사가능도 모형인 경우 quasi를 사용
+#p값이 0.05 보다 작은 deg.malig  만 의미있어 보임
+```{r}
+model <- glm(Class ~ ., data = bc_train, family = binomial)
+summary(model)
+```
+
+#anova 분석에 따르면 tumorsize, invnodes,degmalig가 의미있는 변수 
+```{r}
+anova(model, test="Chisq")
+```
+
+# type을 response로 지정하고 예측을 수행하면 0에서 1사이의 결과값을 구하
+```{r}
+pred <- predict(model,bc_test,type="response")
+pred
+head(table(pred,bc_test$Class))
+```
+
+
+```{r}
+glm.pred=ifelse(pred>0.5,"recur","norecur")
+table(glm.pred,bc_test$Class)
+```
+
+
+#Sensitivity: 0일때 0으로 예측할 확률
+#Specificity: 1일때 1로 예측할 확률
+#Pos Pred Value : 0으로 예측했는데 0일 확률
+#Neg Pred Value :  1로 예측했는데 1로 나올 확률
+#Accuracy : 0.75
+```{r}
+confusionMatrix(table(glm.pred, bc_test$Class))
+```
+
+

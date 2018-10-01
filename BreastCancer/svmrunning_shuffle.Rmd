@@ -1,0 +1,64 @@
+---
+title: "svm"
+author: "KWONHYUNJIN"
+date: "2018년 9월 18일"
+output: html_document
+---
+
+#e1071: svm 을 위한 패키지
+```{r setup, include=FALSE}
+library(xlsx)
+library(dplyr)
+library(ggplot2)
+library(caret)
+library(e1071)
+library(class)
+library(gmodels)
+```
+
+```{r}
+bc <- read.xlsx("New_version_breast_cancer.xlsx",1)
+head(bc)
+```
+
+# set.seed란 랜덤한 값을 시작하기 전에 사용하면 이후에도 같은 값으로 랜덤값을 갖는다.
+# 동일한 랜덤값을 계속해서 받기위해
+# 과연 필요할지에 대해 고찰 
+```{r}
+set.seed(123)
+bc_shuffle <- bc[sample(nrow(bc)), ]
+head(bc_shuffle)
+```
+
+# 현재 bc 데이터 프레임에 id라는 컬럼이 필요없다.
+# bc_shuffle에서 1번컬럼은 제외하고 나머지 컬럼을 bc2에 할당한다.
+```{r}
+bc2 <- bc_shuffle[-1]
+head(bc2)
+```
+
+#default Kernerl 값은 radial 이고
+#gamma는 기울기
+#cost는 과적합을 막는 정도를 지정하는 파라미터
+```{r}
+model <- svm(Class~., data=bc2)
+summary(model)
+```
+
+#분류를 얻을때는 type=“class"를 지정해야하지만, 기본 값이 class이므로 생략 가능
+```{r}
+pred <- predict(model,bc2,type="class")
+head(pred)
+```
+
+#예측값과 실제값의 교차표 생성 
+```{r}
+CrossTable(x=pred,y=bc2$Class)
+```
+
+
+
+#confusionMatrix(예측값, 결과값) 함수를 이용하면 정확도 확인 
+```{r}
+confusionMatrix(table(pred, bc2$Class))
+```

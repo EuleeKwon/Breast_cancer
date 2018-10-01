@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538406787079.000,
+    "dirty" : false,
+    "encoding" : "CP949",
+    "folds" : "",
+    "hash" : "2197639584",
+    "id" : "1BEDEED5",
+    "lastKnownWriteTime" : 1538411168,
+    "last_content_update" : 1538411168938,
+    "path" : "~/RStudio/Breast_Cancer_follow/OPENDATA.Rmd",
+    "project_path" : "OPENDATA.Rmd",
+    "properties" : {
+        "cursorPosition" : "17,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled2"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538386629855.000,
+    "dirty" : false,
+    "encoding" : "CP949",
+    "folds" : "",
+    "hash" : "4052198448",
+    "id" : "EC21CDAE",
+    "lastKnownWriteTime" : 1538387298,
+    "last_content_update" : 1538387298399,
+    "path" : "~/RStudio/BCSC_cancer/ANN.Rmd",
+    "project_path" : "ANN.Rmd",
+    "properties" : {
+        "cursorPosition" : "107,0",
+        "last_setup_crc32" : "399D335Beb49637d",
+        "scrollLine" : "106"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

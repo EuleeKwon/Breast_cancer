@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538409338422.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "502CAF8F",
+    "lastKnownWriteTime" : 18296075356864623,
+    "last_content_update" : 1538409338422,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "529C38DD",
+        "caption" : "WOBC",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=WOBC&cache_key=529C38DD",
+        "displayedObservations" : 699,
+        "environment" : "",
+        "object" : "WOBC",
+        "preview" : 0,
+        "totalObservations" : 699,
+        "variables" : 11
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}
