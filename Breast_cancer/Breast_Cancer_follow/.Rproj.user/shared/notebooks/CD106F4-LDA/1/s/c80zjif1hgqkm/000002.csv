@@ -1,0 +1,7 @@
+"0","set.seed(1234)"
+"0","lda_model <- train(diagnosis~. ,"
+"0","                data = wbcd_train, "
+"0","                method = ""lda"",)"
+"2","Error in train.default(x, y, weights = w, ...) : 
+  argument is missing, with no default
+"

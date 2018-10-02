@@ -1,0 +1,4 @@
+"0","set.seed(1234)"
+"0","LDA_MODEL <- train(Class~. ,"
+"0","                data = wbco_train, "
+"0","                method = ""lda"")"

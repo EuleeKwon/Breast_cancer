@@ -1,0 +1,6 @@
+"0","PERF.AUC <- performance(KNNROC,measure = ""auc"")"
+"0","unlist(PERF.AUC@y.values)"
+"1","[1]"
+"1"," 0.9888889"
+"1","
+"

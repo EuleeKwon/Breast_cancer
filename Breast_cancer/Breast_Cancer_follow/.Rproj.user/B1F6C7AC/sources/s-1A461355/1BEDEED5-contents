@@ -1,0 +1,44 @@
+---
+title: "Data_Convert"
+author: "KWONHYUNJIN"
+date: "2018년 10월 2일"
+output: html_document
+---
+
+```{r}
+library(xlsx)
+```
+
+#WDBC 데이터
+#이미 변수값과 함께 오픈데이터로 KAGGLE 에 공개 
+```{r}
+WDBC <- read.csv(url("https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data"), header=FALSE)
+WDBC_DOWN <- read.csv('data.csv')
+```
+
+#WOBC 데이터(URL)
+```{r}
+WOBC <- read.csv(url("http://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/breast-cancer-wisconsin.data"), header=FALSE)
+colnames(WOBC)<- c("id","Clump_Thickness","Uniformity_of_Cell_Size","Uniformity_of_Cell_Shape","Marginal_Adhesion","Single_Epithelial_Cell_Size","Bare_Nuclei","Bland_Chromatin","Normal_Nucleoli","Mitoses","Class")
+head(WOBC)
+```
+
+#WOBC DATA (DOWNLOAD)
+```{r}
+WOBC <- read.xlsx("WOBC(origin).xlsx",1)
+WOBC$Bare_Nuclei <- as.numeric(as.character(WOBC$Bare_Nuclei))
+table(is.na(WOBC))
+```
+
+```{r}
+WOBC <- na.omit(WOBC)
+table(is.na(WOBC))
+```
+
+
+
+```{r}
+write.xlsx(WOBC,file="WOBC.xlsx")
+```
+
+str(WOBC)

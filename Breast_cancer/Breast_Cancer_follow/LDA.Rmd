@@ -1,0 +1,192 @@
+---
+title: "GLM"
+author: "KWONHYUNJIN"
+date: "2018년 10월 2일"
+output: html_document
+---
+
+```{r include=FALSE}
+library(caret)
+library(lattice)
+library(ggplot2)
+library(xlsx)
+library(e1071)
+library(ROCR)
+```
+
+##WDBC DATA
+```{r}
+wdbc <- read.xlsx("WDBC.xlsx",1)
+str(wdbc)
+```
+
+#id값은 필요없으니 제거
+```{r}
+wbcd <- wdbc[-1]
+```
+
+#양성 종양과 음성 종양 확인 
+```{r}
+table(wbcd$diagnosis)
+```
+
+#정답(LABEL)은 FACTOR로 코딩되어야함으로 해당하는 값을 변환
+#Benign, Maliganant 로 레이블된 종량의 비율 확인 
+```{r}
+wbcd$diagnosis <- factor(wbcd$diagnosis, levels =c("B","M"),labels = c("Benign","Maliganant"))
+round(prop.table(table(wbcd$diagnosis))* 100, digits=1)
+```
+
+#특징의 범위가 매우다름을 확인할 수 있다. 따라서 정규화 작업이 필요하다 
+```{r}
+summary(wbcd[c("radius_mean","area_mean","smoothness_mean")])
+```
+
+# normalize라는 정규화함수를 사용자 정의 함수로 생성하고 정규화한다.
+```{r}
+normalize <- function(x) {
+                 return ( (x-min(x)) / (max(x) - min(x)))
+            }
+
+wbcd_n <- as.data.frame(lapply(wbcd[2:31], normalize))
+summary(wbcd_n$area_mean)
+wbcd_n <- cbind(wbcd[1], wbcd_n)
+```
+
+```{r echo=TRUE}
+train_num<-round(0.7*nrow(wbcd_n),0)
+wbcd_train<-wbcd_n[1:train_num,]
+wbcd_test<-wbcd_n[(train_num+1):nrow(wbcd_n),]
+```
+
+```{r eval=FALSE, include=FALSE}
+set.seed(1234)
+ctrl = trainControl(method = "repeatedcv",
+                    number = 10,
+                    repeats = 10)
+
+lda_model <- train(diagnosis~. ,
+                data = wbcd_train, 
+                method = "lda",
+                preProcess = c("center","scale"),
+                trControl = ctrl)
+```
+
+```{r}
+set.seed(1234)
+lda_model <- train(diagnosis~. ,
+                data = wbcd_train, 
+                method = "lda")
+```
+
+
+```{r}
+ldaPredict <- predict(lda_model,newdata = wbcd_test)
+confusionMatrix(ldaPredict, wbcd_test$diagnosis)
+```
+
+#a는 절편,b는 기울기,lwd는 선두께, lty는 선종류 
+```{r}
+answer <- wbcd_test$diagnosis
+ldaROC <- prediction(as.numeric(ldaPredict), as.numeric(answer))
+prf <- performance(ldaROC,"tpr","fpr")
+plot(prf)+abline(a=0,b=1,lwd=1,lty=2)
+```
+
+#AUC 확인 
+```{r}
+perf.auc <- performance(ldaROC,measure = "auc")
+unlist(perf.auc@y.values)
+```
+
+##!!##
+##WOBC
+##!!##
+```{r}
+wobc <- read.xlsx("WOBC.xlsx",1)
+str(wobc)
+```
+
+#id값은 필요없으니 제거
+```{r}
+wbco <- wobc[-1]
+wbco <- wbco[-1]
+```
+
+#양성 종양과 음성 종양 확인 
+```{r}
+table(wbco$Class)
+table(is.na(wbco))
+```
+
+#정답(LABEL)은 FACTOR로 코딩되어야함으로 해당하는 값을 변환
+#Benign, Maliganant 로 레이블된 종량의 비율 확인 
+```{r}
+wbco$Class <- factor(wbco$Class, levels =c(2,4),labels = c("Benign","Maliganant"))
+round(prop.table(table(wbco$Class))* 100, digits=1)
+```
+
+# normalize라는 정규화함수를 사용자 정의 함수로 생성하고 정규화한다.
+# wbco data had already scaled data.Therefore following code is useless
+```{r eval=FALSE, include=FALSE}
+normalize <- function(x) {
+                 return ( (x-min(x)) / (max(x) - min(x)))
+            }
+
+wbco_n <- as.data.frame(lapply(wbco[1:10], normalize))
+summary(wbco_n$area_mean)
+wbco_n <- cbind(wbco[1], wbco_n)
+```
+
+```{r echo=TRUE}
+wbco_n <- wbco
+train_num<-round(0.7*nrow(wbco_n),0)
+wbco_train<-wbco_n[1:train_num,]
+wbco_test<-wbco_n[(train_num+1):nrow(wbco_n),]
+```
+
+```{r eval=FALSE, include=FALSE}
+set.seed(1234)
+ctrl = trainControl(method = "repeatedcv",
+                    number = 10,
+                    repeats = 10)
+
+LDA_MODEL <- train(Class~. ,
+                data = wbco_train, 
+                method = "lda",
+                preProcess = c("center","scale"),
+                trControl = ctrl)
+```
+
+```{r}
+set.seed(1234)
+LDA_MODEL <- train(Class~. ,
+                data = wbco_train, 
+                method = "lda")
+```
+
+
+```{r}
+LDA_MODEL
+```
+
+
+```{r}
+LDAPREDICT <- predict(LDA_MODEL,newdata = wbco_test)
+confusionMatrix(LDAPREDICT, wbco_test$Class)
+```
+
+#a는 절편,b는 기울기,lwd는 선두께, lty는 선류 
+```{r}
+ANSWER <- wbco_test$Class
+LDAROC <- prediction(as.numeric(LDAPREDICT), as.numeric(ANSWER))
+PRF <- performance(LDAROC,"tpr","fpr")
+plot(PRF)+abline(a=0,b=1,lwd=1,lty=2)
+```
+
+#AUC 확인 
+```{r}
+PERF.AUC <- performance(LDAROC,measure = "auc")
+unlist(PERF.AUC@y.values)
+```
+

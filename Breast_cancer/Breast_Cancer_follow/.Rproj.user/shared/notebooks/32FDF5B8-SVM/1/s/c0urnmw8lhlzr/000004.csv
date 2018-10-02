@@ -1,0 +1,5 @@
+"0","set.seed(1234)"
+"0","SVM_MODEL <- train(Class~. ,"
+"0","                data = wbco_train, "
+"0","                method = ""svmRadial"","
+"0","                tuneGrid = data.frame(.C = 0.25, .sigma = 0.755))"

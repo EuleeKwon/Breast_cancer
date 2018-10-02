@@ -1,0 +1,7 @@
+"0","set.seed(1234)"
+"0","KNNFIT <- train(Class~. ,"
+"0","                data = wbcd_train, "
+"0","                method = ""knn"","
+"0","                tuneGrid = grid)"
+"2","Error in eval(predvars, data, env) : object 'Class' not found
+"

@@ -1,0 +1,6 @@
+"0","ANSWER <- wbco_test$Class"
+"0","LDAROC <- prediction(as.numeric(LDAPREDICT), as.numeric(ANSWER))"
+"0","PRF <- performance(LDAROC,""tpr"",""fpr"")"
+"0","plot(PRF)+abline(a=0,b=1,lwd=1,lty=2)"
+"1","integer(0)
+"

@@ -1,0 +1,6 @@
+"0","perf.auc <- performance(glmROC,measure = ""auc"")"
+"0","unlist(perf.auc@y.values)"
+"1","[1]"
+"1"," 0.9364802"
+"1","
+"

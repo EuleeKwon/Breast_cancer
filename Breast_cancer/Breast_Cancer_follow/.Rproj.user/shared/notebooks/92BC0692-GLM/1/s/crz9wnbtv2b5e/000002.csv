@@ -1,0 +1,4 @@
+"0","wbcd_n <- wbcd"
+"0","train_num<-round(0.7*nrow(wbcd_n),0)"
+"0","wbcd_train<-wbcd_n[1:train_num,]"
+"0","wbcd_test<-wbcd_n[(train_num+1):nrow(wbcd_n),]"

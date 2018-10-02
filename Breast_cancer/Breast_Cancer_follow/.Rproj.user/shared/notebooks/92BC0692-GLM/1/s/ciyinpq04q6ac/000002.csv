@@ -1,0 +1,4 @@
+"0","model <- glm(diagnosis ~ ., data = wbcd_train, family = binomial)
+"
+"2","glm.fit: algorithm did not converge"
+"2","glm.fit: fitted probabilities numerically 0 or 1 occurred"

@@ -1,0 +1,5 @@
+"0","set.seed(1234)"
+"0","svm_model <- train(diagnosis~. ,"
+"0","                data = wbcd_train, "
+"0","                method = ""svmRadial"","
+"0","                tuneGrid = data.frame(.C = 0.25, .sigma = .0464))"

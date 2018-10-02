@@ -1,0 +1,6 @@
+"0","answer <- wbcd_test$diagnosis"
+"0","dtROC <- prediction(as.numeric(dtPredict), as.numeric(answer))"
+"0","prf <- performance(dtROC,""tpr"",""fpr"")"
+"0","plot(prf)+abline(a=0,b=1,lwd=1,lty=2)"
+"1","integer(0)
+"

@@ -1,0 +1,6 @@
+"0","PERF.AUC <- performance(SVMROC,measure = ""auc"")"
+"0","unlist(PERF.AUC@y.values)"
+"1","[1]"
+"1"," 0.98125"
+"1","
+"

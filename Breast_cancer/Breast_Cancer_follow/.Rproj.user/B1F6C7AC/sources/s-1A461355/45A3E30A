@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538461080583.000,
+    "dirty" : false,
+    "encoding" : "CP949",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "45A3E30A",
+    "lastKnownWriteTime" : 1538468492,
+    "last_content_update" : 1538468492198,
+    "path" : "~/RStudio/Breast_Cancer_follow/SVM.Rmd",
+    "project_path" : "SVM.Rmd",
+    "properties" : {
+        "cursorPosition" : "189,25",
+        "scrollLine" : "186",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
