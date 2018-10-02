@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538464483044.000,
+    "dirty" : false,
+    "encoding" : "CP949",
+    "folds" : "",
+    "hash" : "1541043428",
+    "id" : "D728EE32",
+    "lastKnownWriteTime" : 1538468752,
+    "last_content_update" : 1538468752371,
+    "path" : "~/RStudio/Breast_Cancer_follow/DT.Rmd",
+    "project_path" : "DT.Rmd",
+    "properties" : {
+        "cursorPosition" : "95,1",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

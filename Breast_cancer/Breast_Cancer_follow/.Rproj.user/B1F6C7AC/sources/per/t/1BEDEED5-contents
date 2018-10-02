@@ -1,7 +1,7 @@
 ---
 title: "Data_Convert"
 author: "KWONHYUNJIN"
-date: "2018³â 10¿ù 2ÀÏ"
+date: "2018ë…„ 10ì›” 2ì¼"
 output: html_document
 ---
 
@@ -9,14 +9,14 @@ output: html_document
 library(xlsx)
 ```
 
-#WDBC µ¥ÀÌÅÍ
-#ÀÌ¹Ì º¯¼ö°ª°ú ÇÔ²² ¿ÀÇÂµ¥ÀÌÅÍ·Î KAGGLE ¿¡ °ø°³ 
+#WDBC ë°ì´í„°
+#ì´ë¯¸ ë³€ìˆ˜ê°’ê³¼ í•¨ê»˜ ì˜¤í”ˆë°ì´í„°ë¡œ KAGGLE ì— ê³µê°œ 
 ```{r}
 WDBC <- read.csv(url("https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data"), header=FALSE)
 WDBC_DOWN <- read.csv('data.csv')
 ```
 
-#WOBC µ¥ÀÌÅÍ(URL)
+#WOBC ë°ì´í„°(URL)
 ```{r}
 WOBC <- read.csv(url("http://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/breast-cancer-wisconsin.data"), header=FALSE)
 colnames(WOBC)<- c("id","Clump_Thickness","Uniformity_of_Cell_Size","Uniformity_of_Cell_Shape","Marginal_Adhesion","Single_Epithelial_Cell_Size","Bare_Nuclei","Bland_Chromatin","Normal_Nucleoli","Mitoses","Class")
@@ -30,18 +30,18 @@ WOBC$Bare_Nuclei <- as.numeric(as.character(WOBC$Bare_Nuclei))
 table(is.na(WOBC))
 ```
 
-#°áÃøÄ¡ Á¦°Å 
+#ê²°ì¸¡ì¹˜ ì œê±° 
 ```{r}
 WOBC <- na.omit(WOBC)
 table(is.na(WOBC))
 ```
 
-#XLSX·Î µ¥ÀÌÅÍ ÀúÀå 
+#XLSXë¡œ ë°ì´í„° ì €ì¥ 
 ```{r}
 write.xlsx(WOBC,file="WOBC.xlsx")
 ```
 
-#Âü°íÀÚ·áµé
+#ì°¸ê³ ìë£Œë“¤
 #KNN,ROCcurve : https://rpubs.com/njvijay/16444
 #SVM : https://github.com/topepo/caret/blob/master/RegressionTests/Code/svmRadial.R
 #TREE: http://www.dodomira.com/2016/05/29/564/

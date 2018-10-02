@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538466195117.000,
+    "dirty" : false,
+    "encoding" : "CP949",
+    "folds" : "",
+    "hash" : "573939153",
+    "id" : "F9938C86",
+    "lastKnownWriteTime" : 1538469474,
+    "last_content_update" : 1538469474473,
+    "path" : "~/RStudio/Breast_Cancer_follow/GLM.Rmd",
+    "project_path" : "GLM.Rmd",
+    "properties" : {
+        "cursorPosition" : "24,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

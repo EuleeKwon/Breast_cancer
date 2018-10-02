@@ -1,0 +1,100 @@
+---
+title: "H2O"
+author: "KWONHYUNJIN"
+date: "2018년 10월 2일"
+output: html_document
+---
+
+```{r}
+install.packages("h2o")
+```
+
+
+
+# H2O가 의존하는 라이브러리들 설치
+```{r}
+library(h2o)
+h2o.init(nthreads = 3, max_mem_size = "8g")
+```
+
+#데이터 업로드 확인 
+```{r}
+wdbc <- read.xlsx("WDBC.xlsx",1)
+wbcd <- wdbc[-1]
+```
+
+```{r}
+h2o.ls()
+```
+
+```{r}
+wbcd$diagnosis <- factor(wbcd$diagnosis, levels =c("B","M"),labels = c("Benign","Maliganant"))
+round(prop.table(table(wbcd$diagnosis))* 100, digits=1)
+```
+
+
+```{r}
+normalize <- function(x) {
+                 return ( (x-min(x)) / (max(x) - min(x)))
+            }
+
+wbcd_n <- as.data.frame(lapply(wbcd[2:31], normalize))
+summary(wbcd_n$area_mean)
+wbcd_n <- cbind(wbcd[1], wbcd_n)
+```
+
+```{r echo=TRUE}
+wbcd_n <- wbcd
+train_num<-round(0.7*nrow(wbcd_n),0)
+wbcd_train<-wbcd_n[1:train_num,]
+wbcd_test<-wbcd_n[(train_num+1):nrow(wbcd_n),]
+```
+
+```{r}
+wbcd_train_h2o <- as.h2o(wbcd_train, "wbcd_train_h2o")
+wbcd_test_h2o <- as.h2o(wbcd_test, "wbcd_test_h2o")
+```
+#!!!!
+#wobc
+```{r}
+wobc <- read.xlsx("WOBC.xlsx",1)
+str(wobc)
+```
+
+#id값은 필요없으니 제거
+```{r}
+wbco <- wobc[-1]
+wbco <- wbco[-1]
+```
+
+#양성 종양과 음성 종양 확인 
+```{r}
+table(wbco$Class)
+table(is.na(wbco))
+```
+
+#정답(LABEL)은 FACTOR로 코딩되어야함으로 해당하는 값을 변환
+#Benign, Maliganant 로 레이블된 종량의 비율 확인 
+```{r}
+wbco$Class <- factor(wbco$Class, levels =c(2,4),labels = c("Benign","Maliganant"))
+round(prop.table(table(wbco$Class))* 100, digits=1)
+```
+
+```{r echo=TRUE}
+wbco_n <- wbco
+train_num<-round(0.7*nrow(wbco_n),0)
+wbco_train<-wbco_n[1:train_num,]
+wbco_test<-wbco_n[(train_num+1):nrow(wbco_n),]
+```
+
+```{r}
+wbco_train_h2o <- as.h2o(wbco_train, "wbco_train_h2o")
+wbco_test_h2o <- as.h2o(wbco_test, "wbco_test_h2o")
+```
+
+#DNN
+#http://localhost:54321
+#About h2o
+#https://rstudio-pubs-static.s3.amazonaws.com/359032_6d2fa1280f8a40a582c8a40fb46c8c15.html#h2o-
+#http://cinema4dr12.tistory.com/1144
+#https://www.kaggle.com/tobikaggle/h2o-dnn-averaging-in-r

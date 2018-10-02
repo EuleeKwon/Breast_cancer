@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538465912896.000,
+    "dirty" : false,
+    "encoding" : "CP949",
+    "folds" : "",
+    "hash" : "2354640082",
+    "id" : "FB066325",
+    "lastKnownWriteTime" : 1538469002,
+    "last_content_update" : 1538469002400,
+    "path" : "~/RStudio/Breast_Cancer_follow/LDA.Rmd",
+    "project_path" : "LDA.Rmd",
+    "properties" : {
+        "cursorPosition" : "190,3",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
